@@ -1,13 +1,26 @@
 from django.contrib.auth import get_user_model
 from rest_framework import status
 from rest_framework.decorators import action
-from rest_framework.mixins import ListModelMixin, RetrieveModelMixin, UpdateModelMixin
+from rest_framework.mixins import ListModelMixin, RetrieveModelMixin, UpdateModelMixin, CreateModelMixin
+from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 from rest_framework.viewsets import GenericViewSet
 
-from .serializers import UserSerializer
+from .serializers import UserSerializer, UserCreateSerializer
 
 User = get_user_model()
+
+
+class SignUpViewSet(CreateModelMixin, GenericViewSet):
+    permission_classes = [AllowAny]
+    serializer_class = UserCreateSerializer
+    queryset = User.objects.all()
+
+    def perform_create(self, serializer):
+        password = self.request.data.get('password', None)
+        user = serializer.save()
+        user.set_password(password)
+        user.save()
 
 
 class UserViewSet(RetrieveModelMixin, ListModelMixin, UpdateModelMixin, GenericViewSet):
