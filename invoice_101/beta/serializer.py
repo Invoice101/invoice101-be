@@ -1,9 +1,9 @@
 from rest_framework.serializers import ModelSerializer
 
-from .models import BetaSubscription
+from .models import Subscription
 
 
-class BetaSubscriptionSerializer(ModelSerializer):
+class SubscriptionSerializer(ModelSerializer):
     class Meta:
-        model = BetaSubscription
+        model = Subscription
         fields = '__all__'

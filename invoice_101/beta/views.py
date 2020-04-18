@@ -3,11 +3,11 @@ from rest_framework.mixins import CreateModelMixin
 from rest_framework.permissions import AllowAny
 from rest_framework.viewsets import GenericViewSet
 
-from .models import BetaSubscription
-from .serializer import BetaSubscriptionSerializer
+from .models import Subscription
+from .serializer import SubscriptionSerializer
 
 
-class BetaSubscriptionViewSet(GenericViewSet, CreateModelMixin):
-    serializer_class = BetaSubscriptionSerializer
-    queryset = BetaSubscription.objects.all()
+class SubscriptionViewSet(GenericViewSet, CreateModelMixin):
+    serializer_class = SubscriptionSerializer
+    queryset = Subscription.objects.all()
     permission_classes = [AllowAny]

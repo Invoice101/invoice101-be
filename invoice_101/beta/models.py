@@ -4,7 +4,7 @@ from django.db import models
 from model_utils.models import TimeStampedModel
 
 
-class BetaSubscription(TimeStampedModel):
+class Subscription(TimeStampedModel):
     name = models.CharField(max_length=500)
     email = models.EmailField(max_length=500, unique=True)
 
