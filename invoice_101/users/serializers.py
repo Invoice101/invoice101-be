@@ -1,6 +1,6 @@
 from rest_framework import serializers
 
-from invoice_101.users.models import User
+from .models import User
 
 
 class UserSerializer(serializers.ModelSerializer):
