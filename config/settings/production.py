@@ -1,10 +1,9 @@
 import logging
 
 import sentry_sdk
+from sentry_sdk.integrations.celery import CeleryIntegration
 from sentry_sdk.integrations.django import DjangoIntegration
 from sentry_sdk.integrations.logging import LoggingIntegration
-from sentry_sdk.integrations.celery import CeleryIntegration
-
 
 from .base import *  # noqa
 from .base import env
@@ -137,7 +136,6 @@ ANYMAIL = {
     "MAILGUN_API_URL": env("MAILGUN_API_URL", default="https://api.mailgun.net/v3"),
 }
 
-
 # LOGGING
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#logging
@@ -150,7 +148,7 @@ LOGGING = {
     "formatters": {
         "verbose": {
             "format": "%(levelname)s %(asctime)s %(module)s "
-            "%(process)d %(thread)d %(message)s"
+                      "%(process)d %(thread)d %(message)s"
         }
     },
     "handlers": {
@@ -193,3 +191,7 @@ sentry_sdk.init(
 
 # Your stuff...
 # ------------------------------------------------------------------------------
+
+CORS_ORIGIN_WHITELIST = [
+    'https://invoice101.in'
+]

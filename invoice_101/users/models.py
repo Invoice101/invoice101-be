@@ -9,3 +9,5 @@ class User(AbstractUser):
     mobile_no = CharField(_("Mobile Number"), max_length=15, validators=[
         RegexValidator(regex=r'^[0-9]{10,15}$', message='Invalid Mobile Number')
     ], blank=True, null=True, unique=True)
+
+    # Preferences
