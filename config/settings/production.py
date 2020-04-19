@@ -13,7 +13,7 @@ from .base import env
 # https://docs.djangoproject.com/en/dev/ref/settings/#secret-key
 SECRET_KEY = env("DJANGO_SECRET_KEY")
 # https://docs.djangoproject.com/en/dev/ref/settings/#allowed-hosts
-ALLOWED_HOSTS = env.list("DJANGO_ALLOWED_HOSTS", default=["invoice101.in"])
+ALLOWED_HOSTS = env.list("DJANGO_ALLOWED_HOSTS")
 
 # DATABASES
 # ------------------------------------------------------------------------------
@@ -192,6 +192,4 @@ sentry_sdk.init(
 # Your stuff...
 # ------------------------------------------------------------------------------
 
-CORS_ORIGIN_WHITELIST = [
-    'https://invoice101.in'
-]
+CORS_ORIGIN_WHITELIST = ALLOWED_HOSTS
