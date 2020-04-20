@@ -8,12 +8,12 @@ from rest_framework_simplejwt.views import TokenObtainPairView, TokenRefreshView
 
 urlpatterns = [
                   path("", TemplateView.as_view(template_name="pages/home.html"), name="home"),
+                  path("about/", TemplateView.as_view(template_name="pages/about.html"), name="about"),
                   path('favicon.ico', RedirectView.as_view(url='/static/images/favicons/favicon.ico')),
                   path(settings.ADMIN_URL, admin.site.urls),
                   path("accounts/", include("allauth.urls")),
                   # Your stuff: custom urls includes go here
               ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-
 # API URLS
 urlpatterns += [
     path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
