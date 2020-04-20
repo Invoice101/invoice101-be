@@ -192,4 +192,4 @@ sentry_sdk.init(
 # Your stuff...
 # ------------------------------------------------------------------------------
 
-CORS_ORIGIN_WHITELIST = ALLOWED_HOSTS
+CORS_ORIGIN_WHITELIST = env.list("CORS_ORIGIN_WHITELIST")
