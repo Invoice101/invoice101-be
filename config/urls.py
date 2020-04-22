@@ -20,8 +20,10 @@ urlpatterns += [
     path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
 
     # API base url
+    path("api/core/", include("invoice_101.core.urls")),
     path("api/users/", include("invoice_101.users.urls")),
     path("api/beta/", include("invoice_101.beta.urls")),
+    path("api/customer/", include("invoice_101.customer.urls")),
 ]
 
 if settings.DEBUG:

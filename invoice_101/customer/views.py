@@ -19,7 +19,7 @@ class CustomerViewSet(GenericViewSet, ListModelMixin, RetrieveModelMixin, Create
 
     def get_queryset(self):
         sort = self.request.query_params.get('sort', 'name')
-        queryset = self.get_queryset().order_by(sort)
+        queryset = self.queryset.order_by(sort)
 
         queryset = queryset.filter(owner=self.request.user)
         return queryset
