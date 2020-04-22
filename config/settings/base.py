@@ -79,7 +79,10 @@ THIRD_PARTY_APPS = [
 
 LOCAL_APPS = [
     "invoice_101.users.apps.UsersConfig",
+    "invoice_101.core.apps.CoreConfig",
     "invoice_101.beta.apps.BetaConfig",
+    "invoice_101.customer.apps.CustomerConfig",
+    "invoice_101.invoice.apps.InvoiceConfig",
     # Your stuff: custom apps go here
 ]
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
