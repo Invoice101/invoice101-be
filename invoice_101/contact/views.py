@@ -21,5 +21,5 @@ class ContactViewSet(GenericViewSet, ListModelMixin, RetrieveModelMixin, CreateM
         sort = self.request.query_params.get('sort', 'name')
         queryset = self.queryset.order_by(sort)
 
-        queryset = queryset.filter(owner=self.request.user)
+        queryset = queryset.filter(user=self.request.user)
         return queryset

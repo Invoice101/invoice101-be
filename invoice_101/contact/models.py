@@ -7,11 +7,10 @@ from model_utils.models import UUIDModel
 from invoice_101.contact.utils import get_contact_image_path
 from invoice_101.core.models import State
 from invoice_101.utils.common_utils import GSTValidator, PinCodeValidator
-from .constants import CONTACT_TYPE_CHOICES
 
 
 class Contact(UUIDModel):
-    owner = ForeignKey(settings.AUTH_USER_MODEL, on_delete=CASCADE)
+    user = ForeignKey(settings.AUTH_USER_MODEL, on_delete=CASCADE)
     name = CharField(max_length=255)
     email = EmailField()
 
@@ -41,7 +40,7 @@ class Contact(UUIDModel):
         verbose_name_plural = 'Contacts'
 
     def __str__(self):
-        return f'{self.name} - {self.owner}'
+        return f'{self.name} - {self.user}'
 
 
 @receiver(post_delete, sender=Contact)
