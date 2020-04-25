@@ -23,7 +23,7 @@ urlpatterns += [
     path("api/core/", include("invoice_101.core.urls")),
     path("api/users/", include("invoice_101.users.urls")),
     path("api/beta/", include("invoice_101.beta.urls")),
-    path("api/customer/", include("invoice_101.customer.urls")),
+    path("api/contacts/", include("invoice_101.contact.urls")),
 ]
 
 if settings.DEBUG:
