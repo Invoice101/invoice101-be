@@ -1,14 +1,16 @@
 from decimal import Decimal
 
 from django.conf import settings
-# Create your models here.
-from django.db.models import ForeignKey, CharField, FileField, DateTimeField, DecimalField, PROTECT, TextField, CASCADE
-from model_utils.models import UUIDModel
+from django.core.validators import MinValueValidator
+from django.db.models import ForeignKey, CharField, FileField, DateTimeField, DecimalField, PositiveIntegerField, \
+    TextField, PROTECT, CASCADE, Model
+from model_utils.models import UUIDModel, TimeStampedModel
 
 from invoice_101.contact.models import Contact
 from .constants import INVOICE_STATUS_CHOICES
 from .utils import get_invoice_file_path, get_default_valid_till
 from ..core.models import State
+from ..product.models import Product
 from ..utils.common_utils import PinCodeValidator
 
 
@@ -54,3 +56,28 @@ class Invoice(UUIDModel):
 
     def __str__(self):
         return f'{self.number} - {self.contact}'
+
+
+class InvoiceLine(UUIDModel):
+    name = CharField(max_length=100)
+    hsn_sac = CharField(max_length=50, blank=True, null=True)
+    description = CharField(max_length=2000, blank=True, null=True)
+    product = ForeignKey(Product, blank=True, null=True, on_delete=CASCADE)
+
+    quantity = PositiveIntegerField(default=1, validators=[MinValueValidator(1)])
+    unit_price = DecimalField(max_digits=12, decimal_places=2, default=Decimal(0.00))
+    gross_unit_price = DecimalField(max_digits=12, decimal_places=2, default=Decimal(0.00))
+
+    discount = DecimalField(max_digits=12, decimal_places=2, default=Decimal(0.00))
+    tax = DecimalField(max_digits=8, decimal_places=2, default=Decimal(0.00))
+    tax_amount = DecimalField(max_digits=12, decimal_places=2, default=Decimal(0.00))
+
+    amount = DecimalField(max_digits=15, decimal_places=2, default=Decimal(0.00))
+    invoice = ForeignKey(Invoice, related_name='items', on_delete=CASCADE)
+
+    class Meta:
+        verbose_name = 'Invoice Entry'
+        verbose_name_plural = 'Invoice Entries'
+
+    def __str__(self):
+        return '%s' % self.name

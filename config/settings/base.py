@@ -82,6 +82,7 @@ LOCAL_APPS = [
     "invoice_101.users.apps.UsersConfig",
     "invoice_101.beta.apps.BetaConfig",
     "invoice_101.contact.apps.ContactConfig",
+    "invoice_101.product.apps.ProductConfig",
     "invoice_101.invoice.apps.InvoiceConfig",
     # Your stuff: custom apps go here
 ]
