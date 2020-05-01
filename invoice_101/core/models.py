@@ -35,7 +35,8 @@ class GSTSlab(TimeStampedModel):
 
 
 class UOM(TimeStampedModel):
-    name = CharField(max_length=50, unique=True, primary_key=True)
+    short_name = CharField(max_length=10, unique=True, primary_key=True)
+    name = CharField(max_length=50, unique=True)
 
     def __str__(self):
         return self.name
