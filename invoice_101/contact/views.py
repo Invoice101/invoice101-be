@@ -1,5 +1,5 @@
 # Create your views here.
-from rest_framework.filters import SearchFilter
+from rest_framework.filters import SearchFilter, OrderingFilter
 from rest_framework.mixins import ListModelMixin, RetrieveModelMixin, CreateModelMixin, UpdateModelMixin
 from rest_framework.viewsets import GenericViewSet
 
@@ -14,12 +14,6 @@ class ContactViewSet(GenericViewSet, ListModelMixin, RetrieveModelMixin, CreateM
     permission_classes = [ContactPermission]
     queryset = Contact.objects.all()
     pagination_class = StandardResultsSetPagination
-    filter_backends = (SearchFilter,)
+    filter_backends = (SearchFilter, OrderingFilter)
     search_fields = ('name', 'email', 'mobile_no', 'company')
 
-    def get_queryset(self):
-        sort = self.request.query_params.get('sort', 'name')
-        queryset = self.queryset.order_by(sort)
-
-        queryset = queryset.filter(user=self.request.user)
-        return queryset
