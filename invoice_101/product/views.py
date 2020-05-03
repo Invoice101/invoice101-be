@@ -1,6 +1,6 @@
 # Create your views here.
 from rest_framework.filters import SearchFilter, OrderingFilter
-from rest_framework.mixins import CreateModelMixin, ListModelMixin, RetrieveModelMixin
+from rest_framework.mixins import CreateModelMixin, ListModelMixin, RetrieveModelMixin, UpdateModelMixin
 from rest_framework.viewsets import GenericViewSet
 
 from .models import Product
@@ -9,7 +9,7 @@ from .serializers import ProductSerializer
 from ..utils.common_utils import StandardResultsSetPagination
 
 
-class ProductViewSet(GenericViewSet, CreateModelMixin, ListModelMixin, RetrieveModelMixin):
+class ProductViewSet(GenericViewSet, CreateModelMixin, ListModelMixin, RetrieveModelMixin, UpdateModelMixin):
     serializer_class = ProductSerializer
     permission_classes = [ProductPermission]
     pagination_class = StandardResultsSetPagination
